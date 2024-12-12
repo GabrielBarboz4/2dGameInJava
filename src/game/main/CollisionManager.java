@@ -35,7 +35,7 @@ public class CollisionManager {
                 } break;
 
             case "down":
-                entityBottomRow = (entityTopWorldY + entity.speed)/gamePanel.titleSize;
+                entityBottomRow = (entityBottomWorldY + entity.speed)/gamePanel.titleSize;
                 tileNum1 = gamePanel.tileManager.mapTileNum[entityLeftCol][entityBottomRow];
                 tileNum2 = gamePanel.tileManager.mapTileNum[entityRightCol][entityBottomRow];
                 if (gamePanel.tileManager.tile[tileNum1].collision ||

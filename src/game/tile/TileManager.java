@@ -1,7 +1,6 @@
 package game.tile;
 
 import game.main.GamePanel;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.BufferedReader;
@@ -14,7 +13,6 @@ public class TileManager {
     GamePanel gamePanel;
     public Tile[] tile;
     public int mapTileNum[][];
-
 
     public TileManager (GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -86,15 +84,15 @@ public class TileManager {
         int worldRow = 0;
 
         while (worldCol < gamePanel.maxWorldCol && worldRow < gamePanel.maxWorldRow) {
-            int titleNum = mapTileNum[worldCol][worldRow];
 
+            int titleNum = mapTileNum[worldCol][worldRow];
             int worldX = worldCol * gamePanel.titleSize;
             int worldY = worldRow * gamePanel.titleSize;
             int screenX = worldX - gamePanel.player.worldX + gamePanel.player.screenX;
             int screenY = worldY - gamePanel.player.worldY + gamePanel.player.screenY;
 
             if (worldX + gamePanel.titleSize > gamePanel.player.worldX - gamePanel.player.screenX && worldX - gamePanel.titleSize < gamePanel.player.worldX + gamePanel.player.screenX &&
-                worldY + gamePanel.titleSize > gamePanel.player.worldY - gamePanel.player.screenY && worldY - gamePanel.titleSize < gamePanel.player.worldY + gamePanel.player.screenY) {
+                    worldY + gamePanel.titleSize > gamePanel.player.worldY - gamePanel.player.screenY && worldY - gamePanel.titleSize < gamePanel.player.worldY + gamePanel.player.screenY) {
                 g2.drawImage(tile[titleNum].image, screenX, screenY, gamePanel.titleSize, gamePanel.titleSize, null);
             }
             worldCol++;
