@@ -45,6 +45,9 @@ public class TileManager {
             tile[5] = new Tile();
             tile[5].image =  ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("tiles/tile_sand_2.png")));
 
+            tile[6] = new Tile();
+            tile[6].image =  ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("tiles/tile_wood_1.png")));
+
         } catch (IOException e) {
             e.printStackTrace();
         }

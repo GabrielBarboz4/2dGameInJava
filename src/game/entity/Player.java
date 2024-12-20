@@ -110,22 +110,32 @@ public class Player extends Entity{
                     gamePanel.playSoundEfect(1);
                     hasKey++;
                     gamePanel.obj[i] = null;
-                    System.out.println("You found a Key, now you have: " + hasKey + " on your inventory");
+                    gamePanel.ui.showMessagem("You found a Key!");
+
                     break;
                 case "Door":
+
                     if (hasKey > 0) {
                         gamePanel.playSoundEfect(4);
                         gamePanel.obj[i] = null;
                         hasKey --;
-                        System.out.println("You open the door...");
+                        gamePanel.ui.showMessagem("You opened the door!");
+                    } else {
+                        gamePanel.ui.showMessagem("You need to find a key");
                     }
                     break;
 
                 case "Boots":
                     gamePanel.playSoundEfect(3);
                     gamePanel.obj[i] = null;
-                    System.out.println("You found a boots, now you move 25 % faster");
+                    gamePanel.ui.showMessagem("You found a boots, now you move 25 % faster");
                     speed ++;
+                    break;
+
+                case "Chest":
+                    gamePanel.ui.gameFinished = true;
+                    gamePanel.stopMusic();
+                    gamePanel.playSoundEfect( 2 );
                     break;
             }
         }
