@@ -4,4 +4,4 @@
 
 If you found yourself curiously enough to run this project on your computer, feel free to get the VCS to download the code.
 
-All this project was made following the instructions of RuySnow on Youtube and needs to run on SDK +21</h2>
+All this project was made following the instructions of RyiSnow on Youtube and needs to run on SDK +21</h2>
