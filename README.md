@@ -1,7 +1,14 @@
 <h1>Hi,</h1>
 
-<h2>This is basically the finished version of what a "treasure hunt game" looks like when it whas made in Java.
+<h2>
 
-If you found yourself curiously enough to run this project on your computer, feel free to get the VCS to download the code.
+Setting up the project to run the new features that is will be created on this second part of the project:
+
+Wich includes:
+
+- NPCs with dialogues
+- Monsters and other types of entities on the map
+- Setup for life and combact in the game
+- Other features
 
 All this project was made following the instructions of RuySnow on Youtube and needs to run on SDK +21</h2>
