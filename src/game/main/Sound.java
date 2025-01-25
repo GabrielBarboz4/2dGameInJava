@@ -29,7 +29,7 @@ public class Sound {
             clip = AudioSystem.getClip();
             clip.open(ais);
 
-        } catch (Exception _) {
+        } catch (Exception ignored) {
         }
     }
 
@@ -44,6 +44,7 @@ public class Sound {
     }
 
     public void stop () {
+
         clip.stop();
     }
 }
