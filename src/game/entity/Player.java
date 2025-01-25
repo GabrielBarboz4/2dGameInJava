@@ -2,32 +2,25 @@ package game.entity;
 
 import game.main.GamePanel;
 import game.main.KeyHandler;
-import javax.imageio.ImageIO;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Objects;
 
-public class Player extends Entity{
+public class Player extends Entity {
 
     private final GamePanel gamePanel;
     private final KeyHandler keyH;
 
     public final int screenX;
     public final int screenY;
-    public int hasKey = 0;
 
     public Player( GamePanel gamePanel, KeyHandler keyH ) {
+
+        super(gamePanel);
 
         this.gamePanel = gamePanel;
         this.keyH = keyH;
         setDefaultValues();
-
-        try { getPlayerImage();}
-
-        catch ( IOException e ) {
-            throw new RuntimeException(e);
-        }
 
         screenX = gamePanel.screenWidth / 2 - ( gamePanel.titleSize / 2 );
         screenY = gamePanel.screenHeight / 2 - ( gamePanel.titleSize / 2 );
@@ -47,11 +40,13 @@ public class Player extends Entity{
         worldY = gamePanel.titleSize * 30;
         speed = 3;
         direction = "down";
+        getPlayerImage();
     }
 
     public void update() {
 
         if ( keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed ) {
+
             if ( keyH.upPressed ) direction = "up";
             if ( keyH.downPressed ) direction = "down";
             if ( keyH.leftPressed ) direction = "left";
@@ -64,6 +59,10 @@ public class Player extends Entity{
             // Check object collision
             int objIndex = gamePanel.collisionManager.checkObject( this, true );
             pickUpObject( objIndex );
+
+            // Check NPC or Monster Collision
+            int npcIndex = gamePanel.collisionManager.checkEntity(this, gamePanel.npc);
+            interactNPC ( npcIndex );
 
             // Check if collision is false, if its false: Player can move
             if ( !collisionOn ) {
@@ -78,7 +77,7 @@ public class Player extends Entity{
             spriteCounter++;
             if ( spriteCounter > 12 ) {
                 if ( spriteNum == 1 ) {
-                    spriteNum =2;
+                    spriteNum = 2;
                 } else if ( spriteNum == 2 ) {
                     spriteNum = 1;
                 }
@@ -87,57 +86,29 @@ public class Player extends Entity{
         }
     }
 
-    public void getPlayerImage() throws IOException {
+    public void getPlayerImage() {
 
-        up1 = ImageIO.read( Objects.requireNonNull ( getClass().getClassLoader().getResourceAsStream ("player/sprite_up_1.png" )));
-        up2 = ImageIO.read( Objects.requireNonNull (getClass().getClassLoader().getResourceAsStream ("player/sprite_up_2.png" )));
-        down1 = ImageIO.read( Objects.requireNonNull (getClass().getClassLoader().getResourceAsStream ("player/sprite_down_1.png" )));
-        down2 = ImageIO.read( Objects.requireNonNull (getClass().getClassLoader().getResourceAsStream ("player/sprite_down_2.png" ))) ;
-        left1 = ImageIO.read( Objects.requireNonNull (getClass().getClassLoader().getResourceAsStream ("player/sprite_left_1.png" ))) ;
-        left2 = ImageIO.read( Objects.requireNonNull (getClass().getClassLoader().getResourceAsStream ("player/sprite_left_2.png" ))) ;
-        right1 = ImageIO.read( Objects.requireNonNull (getClass().getClassLoader().getResourceAsStream ("player/sprite_right_1.png" )));
-        right2 = ImageIO.read( Objects.requireNonNull (getClass().getClassLoader().getResourceAsStream ("player/sprite_right_2.png" )));
+        up1 = setup( "player/Walking sprites/boy_up_1" );
+        up2 = setup( "player/Walking sprites/boy_up_2" );
+        down1 = setup( "player/Walking sprites/boy_down_1" );
+        down2 = setup( "player/Walking sprites/boy_down_2" );
+        left1 = setup( "player/Walking sprites/boy_left_1" );
+        left2 = setup( "player/Walking sprites/boy_left_2" );
+        right1 = setup( "player/Walking sprites/boy_right_1" );
+        right2 = setup( "player/Walking sprites/boy_right_2" );
+    }
+
+    private void interactNPC( int npcIndex ) {
+
+        if ( npcIndex != 999 ) {
+            System.out.println("Hit npc");
+        }
     }
 
     public void pickUpObject ( int i ) {
 
         if ( i != 999 ) {
 
-            String objectName = gamePanel.obj[i].name;
-
-            switch ( objectName ) {
-                case "Key":
-                    gamePanel.playSoundEfect(1);
-                    hasKey++;
-                    gamePanel.obj[i] = null;
-                    gamePanel.ui.showMessagem("You found a Key!");
-
-                    break;
-                case "Door":
-
-                    if (hasKey > 0) {
-                        gamePanel.playSoundEfect(4);
-                        gamePanel.obj[i] = null;
-                        hasKey --;
-                        gamePanel.ui.showMessagem("You opened the door!");
-                    } else {
-                        gamePanel.ui.showMessagem("You need to find a key");
-                    }
-                    break;
-
-                case "Boots":
-                    gamePanel.playSoundEfect(3);
-                    gamePanel.obj[i] = null;
-                    gamePanel.ui.showMessagem("You found a boots, now you move 25 % faster");
-                    speed ++;
-                    break;
-
-                case "Chest":
-                    gamePanel.ui.gameFinished = true;
-                    gamePanel.stopMusic();
-                    gamePanel.playSoundEfect( 2 );
-                    break;
-            }
         }
     }
 
@@ -168,6 +139,6 @@ public class Player extends Entity{
                 break;
         }
 
-        g2.drawImage( image, screenX, screenY, gamePanel.titleSize, gamePanel.titleSize, null );
+        g2.drawImage( image, screenX, screenY, null );
     }
 }
