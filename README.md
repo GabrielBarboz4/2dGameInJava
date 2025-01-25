@@ -11,4 +11,6 @@ Wich includes:
 - Setup for life and combact in the game
 - Other features
 
-All this project was made following the instructions of RuySnow on Youtube and needs to run on SDK +21</h2>
+All this project was made following the instructions of RyiSnow on Youtube and needs to run on SDK +21</h2>
+
+You can also, check the development stage by looking at the branches: Snapshot-0.1 and Snapshot-0.2
