@@ -107,7 +107,7 @@ public class Player extends Entity{
 
             switch ( objectName ) {
                 case "Key":
-                    gamePanel.playSoundEfect(1);
+                    gamePanel.playSoundEffect(1);
                     hasKey++;
                     gamePanel.obj[i] = null;
                     gamePanel.ui.showMessagem("You found a Key!");
@@ -116,7 +116,7 @@ public class Player extends Entity{
                 case "Door":
 
                     if (hasKey > 0) {
-                        gamePanel.playSoundEfect(4);
+                        gamePanel.playSoundEffect(4);
                         gamePanel.obj[i] = null;
                         hasKey --;
                         gamePanel.ui.showMessagem("You opened the door!");
@@ -126,7 +126,7 @@ public class Player extends Entity{
                     break;
 
                 case "Boots":
-                    gamePanel.playSoundEfect(3);
+                    gamePanel.playSoundEffect(3);
                     gamePanel.obj[i] = null;
                     gamePanel.ui.showMessagem("You found a boots, now you move 25 % faster");
                     speed ++;
@@ -135,7 +135,7 @@ public class Player extends Entity{
                 case "Chest":
                     gamePanel.ui.gameFinished = true;
                     gamePanel.stopMusic();
-                    gamePanel.playSoundEfect( 2 );
+                    gamePanel.playSoundEffect( 2 );
                     break;
             }
         }

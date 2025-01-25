@@ -50,7 +50,6 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void setupGame() {
         aSetter.setObject();
-
         playMusic(0);
     }
     public void startGameThread() {
@@ -61,7 +60,7 @@ public class GamePanel extends JPanel implements Runnable{
     @Override
     public void run() {
 
-        double drawinterval = 1000000000 / fps;
+        double drawInterval = 1000000000 / fps;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
@@ -72,7 +71,7 @@ public class GamePanel extends JPanel implements Runnable{
 
             currentTime = System.nanoTime();
 
-            delta += (currentTime - lastTime) / drawinterval;
+            delta += (currentTime - lastTime) / drawInterval;
             timer += (currentTime - lastTime);
             lastTime = currentTime;
 
@@ -135,7 +134,7 @@ public class GamePanel extends JPanel implements Runnable{
         music.stop();
     }
 
-    public void playSoundEfect ( int i ) {
+    public void playSoundEffect ( int i ) {
 
         soundEfect.setFile(i);
         soundEfect.play();
